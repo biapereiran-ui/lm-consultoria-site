@@ -172,11 +172,6 @@
     background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center/20px no-repeat;
     box-shadow:0 4px 14px rgba(0,0,0,.45);
   }
-  /* fotos de perfil: antes e depois lado a lado, sem slider */
-  .ba.lado{cursor:default;}
-  .ba.lado .ba-before{right:50%;}
-  .ba.lado .ba-after{left:50%; clip-path:none; border-left:3px solid #fff;}
-  .ba.lado .ba-handle{display:none;}
 
   /* ---------- Como funciona (linha do tempo) ---------- */
   .steps-wrap{position:relative; max-width:560px; margin:0 auto; --progress:1;}
@@ -395,7 +390,7 @@
         <button class="ba-thumb" type="button" aria-pressed="false" aria-label="Resultado 9" data-i="9" data-before="Antes do ganho de massa magra" data-after="Depois: ganho de definição e massa magra"><img src="images/rt9.jpg" alt="" loading="lazy"></button>
         <button class="ba-thumb" type="button" aria-pressed="false" aria-label="Resultado 10" data-i="10" data-before="Antes: abdômen sem definição" data-after="Depois: abdômen definido e ganho de massa"><img src="images/rt10.jpg" alt="" loading="lazy"></button>
         <button class="ba-thumb" type="button" aria-pressed="false" aria-label="Resultado 11" data-i="11" data-before="Antes do ganho de massa magra" data-after="Depois: ganho de massa magra nas pernas e no tronco"><img src="images/rt11.jpg" alt="" loading="lazy"></button>
-        <button class="ba-thumb" type="button" aria-pressed="false" aria-label="Resultado 12" data-i="12" data-modo="lado" data-before="Antes: abdômen e glúteos em perfil" data-after="Depois: glúteos e pernas mais definidos em perfil"><img src="images/rt12.jpg" alt="" loading="lazy"></button>
+        <button class="ba-thumb" type="button" aria-pressed="false" aria-label="Resultado 12" data-i="12" data-before="Antes: abdômen e glúteos em perfil" data-after="Depois: glúteos e pernas mais definidos em perfil"><img src="images/rt12.jpg" alt="" loading="lazy"></button>
       </div>
     </div>
   </section>
@@ -595,7 +590,7 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   }
   function stopHint(){ if (hintRaf) cancelAnimationFrame(hintRaf); hintRaf = null; }
   function fromEvent(e){ var r = ba.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); }
-  ba.addEventListener('pointerdown', function(e){ if (ba.classList.contains('lado')) return; stopHint(); dragging = true; ba.setPointerCapture(e.pointerId); fromEvent(e); });
+  ba.addEventListener('pointerdown', function(e){ stopHint(); dragging = true; ba.setPointerCapture(e.pointerId); fromEvent(e); });
   ba.addEventListener('pointermove', function(e){ if (dragging) fromEvent(e); });
   ba.addEventListener('pointerup', function(){ dragging = false; });
   ba.addEventListener('pointercancel', function(){ dragging = false; });
@@ -607,7 +602,7 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   // Vai e volta da barra, mostrando que dá para arrastar
   function hint(){
-    if (reduceMotion || ba.classList.contains('lado')) return;
+    if (reduceMotion) return;
     stopHint();
     var keys = [[0,50],[700,85],[1500,18],[2200,50]], t0 = null;
     function frame(ts){
@@ -633,7 +628,6 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         if (--left) return;
         imgs[0].src = base + '_antes.jpg'; imgs[1].src = base + '_depois.jpg';
         imgs[0].alt = btn.dataset.before; imgs[1].alt = btn.dataset.after;
-        ba.classList.toggle('lado', btn.dataset.modo === 'lado');
         ba.classList.remove('swapping');
         setTimeout(hint, 250);
       };
