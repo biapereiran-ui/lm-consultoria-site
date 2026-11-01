@@ -473,6 +473,62 @@
         <img src="images/dep_disposicao.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
         <span class="testimonial-tag">Mais disposição</span>
       </div>
+      <div class="testimonial-card">
+        <img src="images/dep_energia.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Mais energia nos treinos</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_surreal.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Trabalho surreal</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_amigo.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Acompanhamento de perto</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_maturidade.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Maturidade muscular</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_nutri.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Presença no dia a dia</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_satisfeita.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Dieta com praticidade</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_rapido.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Mudança rápida</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_primeiro_mes.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Primeiro mês</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_dieta.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Dieta possível</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_periodizacao.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Planejamento detalhado</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_joelho.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Treino sem dor no joelho</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_execucao.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Correção de execução</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_quadriceps.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Evolução do quadríceps</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/dep_carga.jpg" alt="Print de conversa no WhatsApp com depoimento de aluno">
+        <span class="testimonial-tag">Mais carga nos treinos</span>
+      </div>
     </div>
     <div class="t-nav">
       <button type="button" id="t-prev" aria-label="Depoimento anterior">&#8249;</button>
@@ -724,7 +780,8 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   function paint(){ order.forEach(function(c, i){ c.dataset.depth = Math.min(i, 3); c.setAttribute('aria-hidden', i ? 'true' : 'false'); }); }
   function fitHeight(){
     stack.style.setProperty('--card-h', 'auto');
-    var h = 0; order.forEach(function(c){ h = Math.max(h, c.offsetHeight); });
+    // teto: sem ele, um print longo deixa todos os curtos cheios de vazio
+    var h = 0; order.forEach(function(c){ h = Math.max(h, c.offsetHeight); }); h = Math.min(h, 480);
     stack.style.setProperty('--stack-h', h + 'px');
     stack.style.setProperty('--card-h', h + 'px');
   }
